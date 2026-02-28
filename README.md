@@ -29,17 +29,3 @@ Or configure in settings: `multiSoundEffect.selectedSound`
 
 - VS Code 1.80.0 or higher
 - Audio playback capability on your system
-
-## Installation
-
-1. Place sound files (MP3 format) in the `sounds/` folder
-2. Run `npm install`
-3. Run `npm run compile`
-4. Press F5 to test the extension
-
-## Adding More Sounds
-
-To add more sounds:
-1. Add MP3 file to `sounds/` folder
-2. Update the enum in `package.json` under `multiSoundEffect.selectedSound`
-3. Update the sounds array in `src/extension.ts`

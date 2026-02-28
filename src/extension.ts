@@ -7,32 +7,20 @@ let previousErrorCount = 0;
 export function activate(context: vscode.ExtensionContext) {
     diagnosticCollection = vscode.languages.createDiagnosticCollection();
     
-    // Watch for diagnostic changes (errors in code)
     vscode.languages.onDidChangeDiagnostics((e) => {
         handleDiagnosticChange(context);
     });
 
-    // Watch for task failures
     vscode.tasks.onDidEndTaskProcess((e) => {
         if (e.exitCode !== 0) {
             playSound(context);
         }
     });
 
-    // Command to select sound
     let selectSoundCmd = vscode.commands.registerCommand('multiSoundEffect.selectSound', async () => {
         const config = vscode.workspace.getConfiguration('multiSoundEffect');
         const sounds = [
-            { label: '😱 Faah', value: 'faah' },
-            { label: '😑 Bruh', value: 'bruh' },
-            { label: '🤦 Oops', value: 'oops' },
-            { label: '❌ Error', value: 'error' },
-            { label: '🔔 Buzzer', value: 'buzzer' },
-            { label: '🎺 Sad Trombone', value: 'sad-trombone' },
-            { label: '🪟 Windows Error', value: 'windows-error' },
-            { label: '🔧 Metal Pipe', value: 'metal-pipe' },
-            { label: '💥 Vine Boom', value: 'vine-boom' },
-            { label: '😵 Oof', value: 'oof' }
+            { label: 'Faah', value: 'faah' },
         ];
 
         const selected = await vscode.window.showQuickPick(sounds, {
@@ -45,7 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // Command to toggle on/off
     let toggleCmd = vscode.commands.registerCommand('multiSoundEffect.toggle', async () => {
         const config = vscode.workspace.getConfiguration('multiSoundEffect');
         const current = config.get('enabled');
