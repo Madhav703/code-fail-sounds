@@ -1,0 +1,68 @@
+{
+  "name": "code-fail-sounds",
+  "displayName": "Code Fail Sounds",
+  "description": "Play hilarious sound effects when your code fails - choose from multiple sounds",
+  "version": "0.0.1",
+  "publisher": "Madhav",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Madhav703/code-fail-sounds"
+  },
+  "bugs": {
+    "url": "https://github.com/Madhav703/code-fail-sounds/issues"
+  },
+  "keywords": [
+    "sound",
+    "audio",
+    "error",
+    "fun",
+    "notification"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Multi Sound Effect",
+      "properties": {
+        "multiSoundEffect.selectedSound": {
+          "type": "string",
+          "default": "faah",
+          "enum": [
+            "faah"
+          ],
+          "description": "Select which sound to play on errors"
+        },
+        "multiSoundEffect.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable sound effects"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "multiSoundEffect.selectSound",
+        "title": "Multi Sound: Select Sound"
+      },
+      {
+        "command": "multiSoundEffect.toggle",
+        "title": "Multi Sound: Toggle On/Off"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}
