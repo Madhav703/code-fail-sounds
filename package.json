@@ -1,6 +1,6 @@
 {
-  "name": "code-fail-sounds",
-  "displayName": "Code Fail Sounds",
+  "name": "code-fail-sounds-test",
+  "displayName": "Code Fail Sounds (Localhost)",
   "description": "Play hilarious sound effects when your code fails - choose from multiple sounds",
   "version": "0.0.1",
   "publisher": "Madhav1111",
@@ -39,12 +39,14 @@
           "enum": [
             "faah",
             "meoww",
-            "abe-sale"
+            "abe-sale",
+            "modi"
           ],
           "enumDescriptions": [
             "Faah sound effect",
             "Meoww sound effect",
-            "Abe Sale sound effect"
+            "Abe Sale sound effect",
+            "Modi sound effect"
           ],
           "description": "Select which sound to play on errors"
         },

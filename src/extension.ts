@@ -2,8 +2,9 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 let previousErrorCount = 0;
+
 let lastSoundTime = 0;
-const SOUND_COOLDOWN = 2000;
+const SOUND_COOLDOWN = 1000;
 
 let lastErrorSignature = '';
 
@@ -100,7 +101,8 @@ function playSound(context: vscode.ExtensionContext) {
     const soundMap: Record<string, string> = {
         'faah': 'fahhh.wav',
         'meoww': 'meoww.wav',
-        'abe-sale': 'abe-sale.wav'
+        'abe-sale': 'abe-sale.wav',
+        'modi': 'modi.wav'
     };
     
     const soundFile = soundMap[selectedSound] || 'fahhh.wav';
@@ -116,5 +118,7 @@ function playSound(context: vscode.ExtensionContext) {
         terminal.sendText(`paplay "${soundPath}" || aplay "${soundPath}"; exit`);
     }
 }
+
+
 
 export function deactivate() {}

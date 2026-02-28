@@ -4,7 +4,7 @@ Play hilarious sound effects when your code fails! Choose from multiple sounds.
 
 ## Features
 
-- 3 different sound effects to choose from
+- 4 different sound effects to choose from
 - Plays sound when:
   - New errors appear in your code
 - Easy sound selection via command palette
@@ -15,6 +15,7 @@ Play hilarious sound effects when your code fails! Choose from multiple sounds.
 1. Faah
 2. Meoww
 3. Abe Saale
+4. Modi
 
 ## Usage
 
