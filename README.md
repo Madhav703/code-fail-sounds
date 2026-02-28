@@ -14,16 +14,8 @@ Play hilarious sound effects when your code fails! Choose from multiple sounds.
 
 ## Available Sounds
 
-1. 😱 Faah
-2. 😑 Bruh
-3. 🤦 Oops
-4. ❌ Error
-5. 🔔 Buzzer
-6. 🎺 Sad Trombone
-7. 🪟 Windows Error
-8. 🔧 Metal Pipe
-9. 💥 Vine Boom
-10. 😵 Oof
+1. Faah
+
 
 ## Usage
 
