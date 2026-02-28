@@ -1,19 +1,21 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 
-let diagnosticCollection: vscode.DiagnosticCollection;
 let previousErrorCount = 0;
+let lastSoundTime = 0;
+const SOUND_COOLDOWN = 2000;
+
+let lastErrorSignature = '';
 
 export function activate(context: vscode.ExtensionContext) {
-    diagnosticCollection = vscode.languages.createDiagnosticCollection();
     
-    vscode.languages.onDidChangeDiagnostics((e) => {
+    vscode.languages.onDidChangeDiagnostics(() => {
         handleDiagnosticChange(context);
     });
 
     vscode.tasks.onDidEndTaskProcess((e) => {
         if (e.exitCode !== 0) {
-            playSound(context);
+            playSoundOnce(context);
         }
     });
 
@@ -21,6 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
         const config = vscode.workspace.getConfiguration('multiSoundEffect');
         const sounds = [
             { label: 'Faah', value: 'faah' },
+            { label: 'Meoww', value: 'meoww' },
+            {label: 'Abe Sale', value: 'abe-sale'}
         ];
 
         const selected = await vscode.window.showQuickPick(sounds, {
@@ -40,32 +44,68 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(`Multi Sound Effect: ${!current ? 'Enabled' : 'Disabled'}`);
     });
 
-    context.subscriptions.push(selectSoundCmd, toggleCmd);
+    let testSoundCmd = vscode.commands.registerCommand('multiSoundEffect.testSound', () => {
+        playSound(context);
+        vscode.window.showInformationMessage('Playing test sound...');
+    });
+
+    context.subscriptions.push(selectSoundCmd, toggleCmd, testSoundCmd);
 }
 
 function handleDiagnosticChange(context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration('multiSoundEffect');
-    if (!config.get('enabled')) return;
+    if (!config.get('enabled')) {
+        return;
+    }
 
     let errorCount = 0;
+    let errorSignature = '';
+    
     vscode.languages.getDiagnostics().forEach(([uri, diagnostics]) => {
-        errorCount += diagnostics.filter(d => d.severity === vscode.DiagnosticSeverity.Error).length;
+        const errors = diagnostics.filter(d => d.severity === vscode.DiagnosticSeverity.Error);
+        errorCount += errors.length;
+        
+        errors.forEach(e => {
+            errorSignature += `${uri.path}:${e.range.start.line}:${e.code}|`;
+        });
     });
 
-    if (errorCount > previousErrorCount) {
-        playSound(context);
+    if (errorCount > previousErrorCount && errorSignature !== lastErrorSignature) {
+        lastErrorSignature = errorSignature;
+        playSoundOnce(context);
     }
+    
     previousErrorCount = errorCount;
+}
+
+function playSoundOnce(context: vscode.ExtensionContext) {
+    const now = Date.now();
+    
+    if (now - lastSoundTime < SOUND_COOLDOWN) {
+        return;
+    }
+    
+    lastSoundTime = now;
+    playSound(context);
 }
 
 function playSound(context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration('multiSoundEffect');
-    if (!config.get('enabled')) return;
+    if (!config.get('enabled')) {
+        return;
+    }
 
     const selectedSound = config.get('selectedSound', 'faah');
-    const soundPath = path.join(context.extensionPath, 'sounds', `${selectedSound}.mp3`);
     
-    // Use platform-specific command to play sound
+    const soundMap: Record<string, string> = {
+        'faah': 'fahhh.wav',
+        'meoww': 'meoww.wav',
+        'abe-sale': 'abe-sale.wav'
+    };
+    
+    const soundFile = soundMap[selectedSound] || 'fahhh.wav';
+    const soundPath = path.join(context.extensionPath, 'sounds', soundFile);
+    
     const terminal = vscode.window.createTerminal({ name: 'Sound Player', hideFromUser: true });
     
     if (process.platform === 'win32') {

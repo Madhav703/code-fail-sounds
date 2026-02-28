@@ -3,7 +3,7 @@
   "displayName": "Code Fail Sounds",
   "description": "Play hilarious sound effects when your code fails - choose from multiple sounds",
   "version": "0.0.1",
-  "publisher": "Madhav",
+  "publisher": "Madhav1111",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,20 +20,31 @@
     "notification"
   ],
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.93.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Multi Sound Effect",
+      "title": "Code Fail Sounds",
       "properties": {
         "multiSoundEffect.selectedSound": {
           "type": "string",
           "default": "faah",
           "enum": [
-            "faah"
+            "faah",
+            "meoww",
+            "abe-sale"
+          ],
+          "enumDescriptions": [
+            "Faah sound effect",
+            "Meoww sound effect",
+            "Abe Sale sound effect"
           ],
           "description": "Select which sound to play on errors"
         },
@@ -52,6 +63,10 @@
       {
         "command": "multiSoundEffect.toggle",
         "title": "Multi Sound: Toggle On/Off"
+      },
+      {
+        "command": "multiSoundEffect.testSound",
+        "title": "Multi Sound: Test Sound"
       }
     ]
   },
@@ -62,7 +77,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.x",
-    "@types/vscode": "^1.80.0",
+    "@types/vscode": "^1.93.0",
     "typescript": "^5.0.0"
   }
 }

@@ -4,18 +4,17 @@ Play hilarious sound effects when your code fails! Choose from multiple sounds.
 
 ## Features
 
-- 10 different sound effects to choose from
+- 3 different sound effects to choose from
 - Plays sound when:
   - New errors appear in your code
-  - Terminal tasks fail
-  - Debug sessions crash
 - Easy sound selection via command palette
 - Toggle on/off anytime
 
 ## Available Sounds
 
 1. Faah
-
+2. Meoww
+3. Abe Saale
 
 ## Usage
 
