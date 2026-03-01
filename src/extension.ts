@@ -8,6 +8,7 @@ const SOUND_COOLDOWN = 1000;
 
 let lastErrorSignature = '';
 
+
 export function activate(context: vscode.ExtensionContext) {
     
     vscode.languages.onDidChangeDiagnostics(() => {
