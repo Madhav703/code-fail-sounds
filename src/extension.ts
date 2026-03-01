@@ -25,7 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
         const sounds = [
             { label: 'Faah', value: 'faah' },
             { label: 'Meoww', value: 'meoww' },
-            {label: 'Abe Sale', value: 'abe-sale'}
+            { label: 'Abe Sale', value: 'abe-sale'},
+            { label: 'Modi', value: 'modi'}
         ];
 
         const selected = await vscode.window.showQuickPick(sounds, {
@@ -52,6 +53,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(selectSoundCmd, toggleCmd, testSoundCmd);
 }
+
+
 
 function handleDiagnosticChange(context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration('multiSoundEffect');
