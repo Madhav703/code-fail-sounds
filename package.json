@@ -1,6 +1,6 @@
 {
-  "name": "code-fail-sounds-test",
-  "displayName": "Code Fail Sounds (Localhost)",
+  "name": "code-fail-sounds",
+  "displayName": "Code Fail Sounds",
   "description": "Play hilarious sound effects when your code fails - choose from multiple sounds",
   "version": "1.0.0",
   "publisher": "Madhav1111",
